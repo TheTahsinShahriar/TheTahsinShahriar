@@ -8,7 +8,6 @@
       font-family: 'Syncopate', sans-serif;
       font-weight: 700;
       font-size: 80px;
-      fill: #FFFFFF;
       text-transform: uppercase;
       letter-spacing: 10px;
       dominant-baseline: middle;
@@ -25,31 +24,14 @@
       text-anchor: middle;
       opacity: 0.7;
     }
-    
-    /* The Glitch Animation */
-    @keyframes glitch-anim {
-      0% { content: "TAHSIN"; fill: #FFFFFF; filter: none; }
-      40% { content: "TAHSIN"; fill: #FFFFFF; filter: none; }
-      41% { content: "VIBE CODER"; fill: #CCFF00; transform: translate(2px, 2px); filter: drop-shadow(4px 4px 0px red); }
-      42% { content: "DESIGNER"; fill: #00FFFF; transform: translate(-2px, -2px); filter: drop-shadow(-4px -4px 0px blue); }
-      43% { content: "TAHSIN"; fill: #FFFFFF; filter: none; transform: translate(0, 0); }
-      45% { content: "CREATIVE"; fill: #FF00FF; transform: translate(1px, -1px); }
-      46% { content: "TAHSIN"; fill: #FFFFFF; transform: translate(0, 0); }
-      100% { content: "TAHSIN"; fill: #FFFFFF; }
-    }
 
-    .glitch::before {
-      content: "TAHSIN";
-      animation: glitch-anim 5s infinite;
-    }
-
-    /* Scanline effect */
     .scanline {
       width: 100%;
       height: 2px;
       fill: rgba(255, 255, 255, 0.1);
       animation: scan 6s linear infinite;
     }
+    
     @keyframes scan {
       0% { y: 0; opacity: 0; }
       10% { opacity: 1; }
@@ -60,7 +42,6 @@
 
   <rect width="800" height="300" class="bg" />
   
-  <!-- Subtle Grid -->
   <defs>
     <pattern id="smallGrid" width="20" height="20" patternUnits="userSpaceOnUse">
       <path d="M 20 0 L 0 0 0 20" fill="none" stroke="#111" stroke-width="1"/>
@@ -68,21 +49,31 @@
   </defs>
   <rect width="800" height="300" fill="url(#smallGrid)" />
 
-  <!-- Animated Text -->
   <g transform="translate(400, 150)">
-    <!-- Main Text -->
-    <text class="text" id="t1" opacity="1">TAHSIN</text>
-    <text class="text" id="t2" opacity="0" fill="#CCFF00">VIBE CODER</text>
-    <text class="text" id="t3" opacity="0" fill="#00FFFF">DESIGNER</text>
+    <!-- Base Layer: TAHSIN -->
+    <text class="text" fill="#FFFFFF" opacity="1">
+      TAHSIN
+      <animate attributeName="opacity" values="1;1;0;0;0;0;1;1" keyTimes="0;0.4;0.41;0.45;0.46;0.5;0.51;1" dur="4s" repeatCount="indefinite" />
+    </text>
+
+    <!-- Glitch Layer 1: VIBE CODER -->
+    <text class="text" fill="#CCFF00" opacity="0">
+      VIBE CODER
+      <animate attributeName="opacity" values="0;0;1;0;0;0;0;0" keyTimes="0;0.4;0.41;0.42;0.45;0.5;0.51;1" dur="4s" repeatCount="indefinite" />
+      <animateTransform attributeName="transform" type="translate" values="2,2; -2,-2; 0,0" keyTimes="0; 0.5; 1" dur="0.2s" repeatCount="indefinite" additive="sum" />
+    </text>
+
+    <!-- Glitch Layer 2: DESIGNER -->
+    <text class="text" fill="#00FFFF" opacity="0">
+      DESIGNER
+      <animate attributeName="opacity" values="0;0;0;1;0;0;0;0" keyTimes="0;0.42;0.43;0.45;0.46;0.5;0.51;1" dur="4s" repeatCount="indefinite" />
+      <animateTransform attributeName="transform" type="translate" values="-2,-2; 2,2; 0,0" keyTimes="0; 0.5; 1" dur="0.2s" repeatCount="indefinite" additive="sum" />
+    </text>
   </g>
   
   <text x="400" y="220" class="sub">Digital Reality Distortion Field</text>
   
+  <!-- Scanline needs to be last to overlay everything -->
   <rect class="scanline" width="800" height="2" />
-
-  <!-- SMIL Animation for GitHub Compatibility (CSS Keyframes for opacity usually work, but let's be robust) -->
-  <animate xlink:href="#t1" attributeName="opacity" values="1;1;0;0;0;0;1;1" keyTimes="0;0.4;0.41;0.45;0.46;0.5;0.51;1" dur="4s" repeatCount="indefinite" />
-  <animate xlink:href="#t2" attributeName="opacity" values="0;0;1;0;0;0;0;0" keyTimes="0;0.4;0.41;0.42;0.45;0.5;0.51;1" dur="4s" repeatCount="indefinite" />
-  <animate xlink:href="#t3" attributeName="opacity" values="0;0;0;1;0;0;0;0" keyTimes="0;0.42;0.43;0.45;0.46;0.5;0.51;1" dur="4s" repeatCount="indefinite" />
 
 </svg>
