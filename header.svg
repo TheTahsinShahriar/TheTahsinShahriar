@@ -1,141 +1,98 @@
 <svg width="800" height="300" viewBox="0 0 800 300" fill="none" xmlns="http://www.w3.org/2000/svg">
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@800&family=Rajdhani:wght@500;700&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap');
     
-    .bg { fill: #030303; }
+    .bg { fill: #050505; }
     
-    /* Typography */
-    .title {
-      font-family: 'JetBrains Mono', monospace;
-      font-weight: 800;
+    .text {
+      font-family: 'Inter', sans-serif;
+      font-weight: 600;
       font-size: 80px;
-      text-transform: uppercase;
-      letter-spacing: -2px;
+      fill: #FFFFFF;
+      letter-spacing: -3px;
       dominant-baseline: middle;
       text-anchor: middle;
     }
     
-    .data-stream {
-      font-family: 'Rajdhani', sans-serif;
-      font-size: 10px;
-      fill: #00FF41; 
-      opacity: 0.15;
+    /* Smooth Blob Animation */
+    @keyframes moveBlob1 {
+      0% { cx: 200; cy: 150; r: 100; }
+      33% { cx: 400; cy: 100; r: 120; }
+      66% { cx: 600; cy: 150; r: 90; }
+      100% { cx: 200; cy: 150; r: 100; }
     }
-
-    .label {
-      font-family: 'Rajdhani', sans-serif;
-      font-weight: 700;
-      font-size: 12px;
-      fill: #CCFF00;
-      letter-spacing: 2px;
+    
+    @keyframes moveBlob2 {
+      0% { cx: 600; cy: 150; r: 100; }
+      33% { cx: 400; cy: 200; r: 130; }
+      66% { cx: 200; cy: 100; r: 110; }
+      100% { cx: 600; cy: 150; r: 100; }
     }
-
-    /* Animations */
-    @keyframes scroll {
-      0% { transform: translateY(0); }
-      100% { transform: translateY(-50%); }
+    
+    @keyframes moveBlob3 {
+      0% { cx: 400; cy: 200; r: 80; opacity: 0.6; }
+      50% { cx: 400; cy: 50; r: 140; opacity: 0.8; }
+      100% { cx: 400; cy: 200; r: 80; opacity: 0.6; }
     }
   </style>
 
   <rect width="800" height="300" class="bg" />
-
-  <!-- Background Data Stream -->
+  
   <defs>
-    <pattern id="dataPattern" x="0" y="0" width="800" height="600" patternUnits="userSpaceOnUse">
-       <text x="10" y="20" class="data-stream">0F 2A 4C 91 00 FF 0F 2A 4C 91 00 FF 0F 2A 4C 91 00 FF 0F 2A 4C 91 00 FF</text>
-       <text x="10" y="40" class="data-stream">SYSTEM_INIT // CORE_DUMP // MEMORY_LEAK // STACK_OVERFLOW // NULL_POINTER</text>
-       <text x="10" y="60" class="data-stream">10101010 00101010 11100010 10101010 00101010 11100010</text>
-       <text x="10" y="80" class="data-stream">VIBE_CODER_DETECTED // OVERRIDE_AUTH // ADMIN_ACCESS_GRANTED</text>
-       <text x="10" y="100" class="data-stream">A1 B2 C3 D4 E5 F6 A1 B2 C3 D4 E5 F6 A1 B2 C3 D4 E5 F6</text>
-       <text x="10" y="120" class="data-stream">RENDER_TARGET: VOID // SHADER_COMPILE_SUCCESS // BUFFER_CLEAR</text>
-       <text x="10" y="140" class="data-stream">00 11 00 11 00 11 00 11 00 11 00 11</text>
-       
-       <!-- Repeat for density -->
-       <text x="10" y="180" class="data-stream">0F 2A 4C 91 00 FF 0F 2A 4C 91 00 FF 0F 2A 4C 91 00 FF 0F 2A 4C 91 00 FF</text>
-       <text x="10" y="200" class="data-stream">SYSTEM_INIT // CORE_DUMP // MEMORY_LEAK // STACK_OVERFLOW // NULL_POINTER</text>
-       <text x="10" y="220" class="data-stream">10101010 00101010 11100010 10101010 00101010 11100010</text>
-       <text x="10" y="240" class="data-stream">VIBE_CODER_DETECTED // OVERRIDE_AUTH // ADMIN_ACCESS_GRANTED</text>
-       <text x="10" y="260" class="data-stream">A1 B2 C3 D4 E5 F6 A1 B2 C3 D4 E5 F6 A1 B2 C3 D4 E5 F6</text>
-       <text x="10" y="280" class="data-stream">RENDER_TARGET: VOID // SHADER_COMPILE_SUCCESS // BUFFER_CLEAR</text>
-       <text x="10" y="300" class="data-stream">00 11 00 11 00 11 00 11 00 11 00 11</text>
-    </pattern>
-    
-    <!-- Linear Gradient Mask for fading out edges -->
-    <mask id="fadeMask">
-      <linearGradient id="g1" x1="0" y1="0" x2="0" y2="1">
-        <stop offset="0%" stop-color="black"/>
-        <stop offset="20%" stop-color="white"/>
-        <stop offset="80%" stop-color="white"/>
-        <stop offset="100%" stop-color="black"/>
-      </linearGradient>
-      <!-- Also horizontal fade -->
-      <rect width="800" height="300" fill="url(#g1)" />
-    </mask>
-
-    <!-- Filter: Chromatic Aberration Simulation -->
-    <filter id="chromatic">
-      <feOffset in="SourceGraphic" dx="-2" dy="0" result="left"/>
-      <feOffset in="SourceGraphic" dx="2" dy="0" result="right"/>
-      <feMerge>
-        <feMergeNode in="left" />
-        <feMergeNode in="right" />
-        <feMergeNode in="SourceGraphic" />
-      </feMerge>
+    <filter id="blurFilter">
+      <feGaussianBlur in="SourceGraphic" stdDeviation="40" />
     </filter>
   </defs>
-
-  <!-- Scrolling Background Group -->
-  <g mask="url(#fadeMask)">
-    <rect width="800" height="600" fill="url(#dataPattern)">
-       <animateTransform attributeName="transform" type="translate" from="0 0" to="0 -300" dur="20s" repeatCount="indefinite" />
-    </rect>
+  
+  <!-- Aura Blobs -->
+  <g filter="url(#blurFilter)" opacity="0.6">
+    <!-- Cyber Lime -->
+    <circle fill="#CCFF00">
+      <animate attributeName="cx" values="200;400;600;200" dur="15s" repeatCount="indefinite" />
+      <animate attributeName="cy" values="150;100;150;150" dur="15s" repeatCount="indefinite" />
+      <animate attributeName="r" values="100;120;90;100" dur="15s" repeatCount="indefinite" />
+    </circle>
+    
+    <!-- Hot Pink / Magenta -->
+    <circle fill="#FF00CC">
+      <animate attributeName="cx" values="600;400;200;600" dur="18s" repeatCount="indefinite" />
+      <animate attributeName="cy" values="150;200;100;150" dur="18s" repeatCount="indefinite" />
+      <animate attributeName="r" values="100;130;110;100" dur="18s" repeatCount="indefinite" />
+    </circle>
+    
+    <!-- Electric Blue -->
+    <circle fill="#00FFFF">
+       <animate attributeName="cx" values="400;350;450;400" dur="8s" repeatCount="indefinite" />
+       <animate attributeName="cy" values="200;50;200;200" dur="12s" repeatCount="indefinite" />
+       <animate attributeName="r" values="80;140;80;80" dur="12s" repeatCount="indefinite" />
+    </circle>
   </g>
 
-  <!-- Main Title Group with Manual RGB Split (More reliable than filters) -->
+  <!-- Content -->
   <g transform="translate(400, 150)">
-    
-    <!-- Red Channel (Left Drift) -->
-    <text class="title" fill="#FF0055" opacity="0.7">
-      TAHSIN
-      <animate attributeName="dx" values="0; -3; 3; 0; -5; 0" keyTimes="0; 0.1; 0.2; 0.3; 0.4; 1" dur="3s" repeatCount="indefinite" />
-      <animate attributeName="opacity" values="0; 0.7; 0" keyTimes="0; 0.1; 0.3" dur="5s" repeatCount="indefinite" />
+    <!-- tahsin. -->
+    <text class="text" fill="#FFFFFF" opacity="1">
+      tahsin.
+      <animate attributeName="opacity" values="1;1;0;0;1;1" keyTimes="0;0.45;0.5;0.95;1" dur="10s" repeatCount="indefinite" />
     </text>
 
-    <!-- Cyan Channel (Right Drift) -->
-    <text class="title" fill="#00FFFF" opacity="0.7">
-      TAHSIN
-      <animate attributeName="dx" values="0; 3; -3; 0; 5; 0" keyTimes="0; 0.1; 0.2; 0.3; 0.4; 1" dur="2.5s" repeatCount="indefinite" />
-      <animate attributeName="opacity" values="0; 0.7; 0" keyTimes="0; 0.2; 0.4" dur="4s" repeatCount="indefinite" />
+    <!-- vibe coder. -->
+    <text class="text" fill="#FFFFFF" opacity="0">
+      vibe coder.
+      <animate attributeName="opacity" values="0;0;1;1;0;0" keyTimes="0;0.5;0.55;0.90;0.95;1" dur="10s" repeatCount="indefinite" />
     </text>
-
-    <!-- Main White Text -->
-    <text class="title" fill="#FFFFFF">
-      TAHSIN
-    </text>
-    
-    <!-- Glitch Overlay Text: VIBE CODER -->
-    <g>
-      <text class="title" fill="#CCFF00" opacity="0">
-        VIBE CODER
-        <!-- Flash in violently -->
-        <animate attributeName="opacity" values="0;0;1;0;1;0;0" keyTimes="0;0.9;0.91;0.92;0.93;0.94;1" dur="6s" repeatCount="indefinite" />
-      </text>
-    </g>
   </g>
 
-  <!-- HUD Elements -->
-  <!-- Top Left -->
-  <path d="M 20 20 L 50 20 L 50 25 L 20 25 Z" fill="#CCFF00" />
-  <text x="60" y="28" class="label">NEURAL_LINK: ACTIVE</text>
-
-  <!-- Bottom Right -->
-  <path d="M 780 280 L 750 280 L 750 275 L 780 275 Z" fill="#00FFFF" />
-  <text x="640" y="282" class="label" text-anchor="end">MEM_USAGE: 99%</text>
-
-  <!-- Animated Scanner Bar -->
-  <rect x="0" y="0" width="800" height="2" fill="#FFFFFF" opacity="0.5">
-    <animate attributeName="y" values="0; 300; 0" dur="4s" repeatCount="indefinite" />
-    <animate attributeName="opacity" values="0; 0.5; 0" dur="4s" repeatCount="indefinite" />
-  </rect>
+  <!-- Noise Overlay for texture -->
+  <defs>
+     <filter id="noise">
+       <feTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="3" stitchTiles="stitch"/>
+       <feColorMatrix type="saturate" values="0"/>
+       <feComponentTransfer>
+         <feFuncA type="linear" slope="0.1"/>
+       </feComponentTransfer>
+     </filter>
+   </defs>
+   <rect width="800" height="300" filter="url(#noise)" opacity="0.4" style="mix-blend-mode: overlay;" />
 
 </svg>
