@@ -6,11 +6,11 @@
 <a href="https://github.com/TheTahsinShahriar">
   <picture>
     <!-- Dark Mode: Loads White/Cyan Text -->
-    <source media="(prefers-color-scheme: dark)" srcset="https://readme-typing-svg.herokuapp.com?font=Samsung+Sharp+Sans&weight=700&size=50&duration=3000&pause=1000&color=FFFFFF&center=true&vCenter=true&width=600&height=100&lines=Tahsin+Shahriar;Building+interesting+stuff.;Automating+the+boring+part.">
+    <source media="(prefers-color-scheme: dark)" srcset="https://readme-typing-svg.herokuapp.com?font=Inter&weight=700&size=50&duration=3000&pause=1000&color=FFFFFF&center=true&vCenter=true&width=600&height=100&lines=Tahsin+Shahriar;Building+interesting+stuff.;That+makes+life+easier.">
     <!-- Light Mode: Loads Black/Royal Blue Text -->
-    <source media="(prefers-color-scheme: light)" srcset="https://readme-typing-svg.herokuapp.com?font=Samsung+Sharp+Sans&weight=700&size=50&duration=3000&pause=1000&color=1A1A1A&center=true&vCenter=true&width=600&height=100&lines=Tahsin+Shahriar;Building+interesting+stuff.;Automating+the+boring+part.">
+    <source media="(prefers-color-scheme: light)" srcset="https://readme-typing-svg.herokuapp.com?font=Inter&weight=700&size=50&duration=3000&pause=1000&color=1A1A1A&center=true&vCenter=true&width=600&height=100&lines=Tahsin+Shahriar;Building+interesting+stuff.;That+makes+life+easier.">
     <!-- Fallback -->
-    <img alt="Tahsin Shahriar" src="https://readme-typing-svg.herokuapp.com?font=Samsung+Sharp+Sans&weight=700&size=50&duration=3000&pause=1000&color=2F80ED&center=true&vCenter=true&width=600&height=100&lines=Tahsin+Shahriar;Building+interesting+stuff.;Automating+the+boring+part.">
+    <img alt="Tahsin Shahriar" src="https://readme-typing-svg.herokuapp.com?font=Inter&weight=700&size=50&duration=3000&pause=1000&color=2F80ED&center=true&vCenter=true&width=600&height=100&lines=Tahsin+Shahriar;Building+interesting+stuff.;That+makes+life+easier.">
   </picture>
 </a>
 
@@ -26,8 +26,8 @@
 
 <br/>
 
-<font face="Samsung Sharp Sans" size="2" color="#666666">
-Automating the boring part.
+<font face="Inter" size="2" color="#666666">
+Building stuff that makes life easier.
 </font>
 
 </div>
